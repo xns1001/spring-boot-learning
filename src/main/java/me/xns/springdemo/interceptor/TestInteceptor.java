@@ -1,6 +1,5 @@
 package me.xns.springdemo.interceptor;
 
-import javafx.print.Printer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
