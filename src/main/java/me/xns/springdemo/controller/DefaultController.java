@@ -36,7 +36,7 @@ public class DefaultController {
     public String commitForm(Model model) {
         User user = new User();
         user.setName("xns");
-        user.setMsg("hello spring");
+        user.setDesc("hello spring");
         model.addAttribute("user", user);
         return "formtest1";
     }
@@ -71,10 +71,14 @@ public class DefaultController {
     @PostMapping("/user")
     @ResponseBody
     public User addUser(@RequestParam("name") String name,
-                        @RequestParam(value = "msg", required = false, defaultValue = "") String msg) {
+                        @RequestParam(value = "age", required = false) Integer age,
+                        @RequestParam(value = "desc", required = false, defaultValue = "") String desc) {
         User user = new User();
         user.setName(name);
-        user.setMsg(msg);
+        if (age != null) {
+            user.setAge(age);
+        }
+        user.setDesc(desc);
         User save = userRepository.save(user);
         return save;
     }
@@ -97,11 +101,11 @@ public class DefaultController {
     @ResponseBody
     public User updateUser(@PathVariable("id") Integer id,
                            @RequestParam(required = true, name = "name") String name,
-                           @RequestParam(required = true, name = "msg") String msg) {
+                           @RequestParam(required = true, name = "desc") String desc) {
         User user = new User();
         user.setId(id);
         user.setName(name);
-        user.setMsg(msg);
+        user.setDesc(desc);
         User save = userRepository.save(user);
         return save;
     }

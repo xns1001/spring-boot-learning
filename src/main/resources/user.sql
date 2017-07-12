@@ -1,0 +1,14 @@
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`spring` /*!40100 DEFAULT CHARACTER SET utf8 */;
+
+USE `spring`;
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `name` varchar(20) DEFAULT NULL COMMENT '姓名',
+  `age` int(3) DEFAULT NULL COMMENT '年龄',
+  `description` varchar(100) DEFAULT NULL COMMENT '描述',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=500 DEFAULT CHARSET=utf8;
