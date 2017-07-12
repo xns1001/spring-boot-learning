@@ -7,6 +7,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
@@ -22,6 +23,9 @@ import java.util.Arrays;
 public class WebLogAspect {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
+    @Value("${xns.env}")
+    String env;
+
     @Pointcut("execution(public * me.xns.springdemo.controller..*.*(..))")
 //    @Pointcut("execution(* me.xns.springdemo.controller..*.*(..)) && @annotation(org.springframework.web.bind.annotation.RequestMapping)")
     public void webLog() {
@@ -33,6 +37,7 @@ public class WebLogAspect {
         ServletRequestAttributes attributes = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = attributes.getRequest();
         // 记录下请求内容
+        logger.info("env: " + env);
         logger.info("URL : " + request.getRequestURL().toString());
         logger.info("HTTP_METHOD : " + request.getMethod());
         logger.info("IP : " + request.getRemoteAddr());

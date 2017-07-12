@@ -13,4 +13,9 @@ public class Demo1ApplicationTests {
 	public void contextLoads() {
 	}
 
+	@Test
+	public void testMybatis(){
+
+	}
+
 }
