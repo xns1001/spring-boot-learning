@@ -1,7 +1,5 @@
 package me.xns.springdemo.controller;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import me.xns.springdemo.dao.UserRepository;
 import me.xns.springdemo.domain.LearnResouce;
 import me.xns.springdemo.domain.User;
@@ -21,15 +19,13 @@ import java.util.List;
  * Created by xns on 2017/7/10.
  */
 @Controller
-public class DefaultController {
+@RequestMapping("/learn")
+public class LearnController {
 
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
     LearnService learnService;
-
-    @Autowired
-    UserRepository userRepository;
 
 
     @RequestMapping("/formtest")
@@ -67,56 +63,5 @@ public class DefaultController {
         }
         return learnResouces;
     }
-
-    @PostMapping("/user")
-    @ResponseBody
-    public User addUser(@RequestParam("name") String name,
-                        @RequestParam(value = "age", required = false) Integer age,
-                        @RequestParam(value = "desc", required = false, defaultValue = "") String desc) {
-        User user = new User();
-        user.setName(name);
-        if (age != null) {
-            user.setAge(age);
-        }
-        user.setDesc(desc);
-        User save = userRepository.save(user);
-        return save;
-    }
-
-    @GetMapping("/user/{id}")
-    @ResponseBody
-    public User getUser(@PathVariable("id") Integer id) {
-        User one = userRepository.findOne(id);
-        return one;
-    }
-
-    @GetMapping("/users")
-    @ResponseBody
-    public List<User> getAllUser() {
-        List<User> all = userRepository.findAll();
-        return all;
-    }
-
-    @PutMapping("/user/{id}")
-    @ResponseBody
-    public User updateUser(@PathVariable("id") Integer id,
-                           @RequestParam(required = true, name = "name") String name,
-                           @RequestParam(required = true, name = "desc") String desc) {
-        User user = new User();
-        user.setId(id);
-        user.setName(name);
-        user.setDesc(desc);
-        User save = userRepository.save(user);
-        return save;
-    }
-
-    @DeleteMapping("/user/{id}")
-    @ResponseBody
-    public User deleteUser(@PathVariable("id") Integer id) {
-        User one = userRepository.findOne(id);
-        userRepository.delete(id);
-        return one;
-    }
-
 
 }

@@ -6,10 +6,10 @@
     <title>Home</title>
 </head>
 <body>
-<form th:action="@{/formtest2}" th:object="${user}" th:method="post">
+<form th:action="@{/learn/formtest2}" th:object="${user}" th:method="post">
 
     <input type="text" th:field="*{name}"/>
-    <input type="text" th:field="*{msg}"/>
+    <input type="text" th:field="*{desc}"/>
 
     <input type="submit"/>
 </form>

@@ -4,6 +4,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.NotNull;
 
 /**
  * Created by xns on 2017/7/10.
@@ -13,10 +15,15 @@ public class User {
     @Id
     @GeneratedValue
     private Integer id;
-    @Column(name = "name")
+
+    @NotNull(message = "名字不能为空")
+    @Column(name = "username")
     private String name;
+
+    @Max(value = 120, message = "年龄不能超过120")
     @Column(name = "age")
     private Integer age;
+
     @Column(name = "description")   //desc为mysql关键词,不能用!!!
     private String desc;
 
